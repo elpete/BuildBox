@@ -20,6 +20,6 @@ export default function(name, src, command) {
         );
     })
     .watch(src)
-    .watch(BuildBox.config.appPath + '/**/*.php', 'tdd')
-    .watch(BuildBox.config.viewPath +'/**/*.php', 'tdd');
+    .watch(BuildBox.config.appPath + '/**/*.cfc', 'tdd')
+    .watch(BuildBox.config.appPath + '/**/*.cfm', 'tdd')
 };

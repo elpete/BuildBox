@@ -66,25 +66,12 @@ const config = {
      |----------------------------------------------------------------
      |
      | The app path, you guessed it, specifies the path to the app
-     | folder in your project. If using Laravel, then you won't
+     | folder in your project. If using ColdBox, then you won't
      | need to modify this path. Otherwise modify as needed.
      |
      */
 
-    appPath: 'app',
-
-    /*
-     |----------------------------------------------------------------
-     | View Path
-     |----------------------------------------------------------------
-     |
-     | Very likely, you will never need/want to modify this property.
-     | However, for the instances where your app's views directory
-     | is located in a different spot, please modify as needed.
-     |
-     */
-
-    viewPath: 'resources/views',
+    appPath: '',
 
     /*
      |----------------------------------------------------------------

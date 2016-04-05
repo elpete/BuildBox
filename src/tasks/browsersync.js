@@ -21,11 +21,11 @@ BuildBox.extend('browserSync', function (options) {
 
     options = _.extend({
         files: [
-            config.appPath + '/**/*.php',
+            config.appPath + '/**/*.cfc',
+            config.appPath + '/**/*.cfm',
             config.get('public.css.outputFolder') + '/**/*.css',
             config.get('public.js.outputFolder') + '/**/*.js',
-            config.get('public.versioning.buildFolder') + '/rev-manifest.json',
-            config.viewPath +'/**/*.php'
+            config.get('public.versioning.buildFolder') + '/rev-manifest.json'
         ],
         watchOptions: {
             usePolling: true
