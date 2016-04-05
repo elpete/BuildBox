@@ -2,7 +2,7 @@
 
 ## Attribution
 
-This project was forked from the **excellent** [BuildBox](https://github.com/laravel/elixir).  Many thanks to [@JeffreyWay](https://github.com/JeffreyWay) and the Laravel community for such a great and easy way to handle front-end builds.
+This project was forked from the **excellent** [Laravel Elixir](https://github.com/laravel/elixir).  Many thanks to [@JeffreyWay](https://github.com/JeffreyWay) and the Laravel community for such a great and easy way to handle front-end builds.
 
 ## Introduction
 
