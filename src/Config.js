@@ -58,7 +58,7 @@ const config = {
      |
      */
 
-    publicPath: 'public',
+    publicPath: 'includes',
 
     /*
      |----------------------------------------------------------------

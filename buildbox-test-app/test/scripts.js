@@ -13,17 +13,17 @@ describe('Scripts Task', function() {
         BuildBox(mix => mix.scripts(['lib1.js', 'lib2.js']));
 
         runGulp(() => {
-            shouldExist('public/js/all.js');
+            shouldExist('includes/js/all.js');
 
             done();
         });
     });
 
     it('merges to any file the user wishes', function(done) {
-        BuildBox(mix => mix.scripts(['lib1.js', 'lib2.js'], './public/js/merged.js'));
+        BuildBox(mix => mix.scripts(['lib1.js', 'lib2.js'], './includes/js/merged.js'));
 
         runGulp(() => {
-            shouldExist('public/js/merged.js');
+            shouldExist('includes/js/merged.js');
 
             done();
         });
@@ -38,7 +38,7 @@ describe('Scripts Task', function() {
         });
 
         runGulp(() => {
-            shouldExist('public/js/all.js');
+            shouldExist('includes/js/all.js');
 
             done();
         });
@@ -56,7 +56,7 @@ var runGulp = assertions => {
     gulp.start('default', () => {
         assertions();
 
-        remove.sync('./public/js');
+        remove.sync('./includes/js');
         remove.sync('./resources/assets/scripts');
     });
 };

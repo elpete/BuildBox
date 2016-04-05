@@ -10,11 +10,11 @@ describe('Sass Task', function() {
         BuildBox.tasks.empty();
     });
 
-    it('compiles Sass files to the public/css directory', done => {
+    it('compiles Sass files to the includes/css directory', done => {
         BuildBox(mix => mix.sass('app.scss'));
 
         runGulp(() => {
-            shouldExist('./public/css/app.css');
+            shouldExist('./includes/css/app.css');
 
             done();
         });
@@ -24,7 +24,7 @@ describe('Sass Task', function() {
         BuildBox(mix => mix.sass('app.scss'));
 
         runGulp(() => {
-            shouldExist('./public/css/app.css.map');
+            shouldExist('./includes/css/app.css.map');
 
             done();
         });
@@ -35,7 +35,7 @@ describe('Sass Task', function() {
         BuildBox(mix => mix.sass('another.scss'));
 
         runGulp(() => {
-            shouldExist('./public/css/another.css');
+            shouldExist('./includes/css/another.css');
 
             done();
         });
@@ -43,10 +43,10 @@ describe('Sass Task', function() {
 
 
     it('compiles to a custom directory and file name', done => {
-        BuildBox(mix => mix.sass(['app.scss', 'another.scss'], './public/styles/done.css'));
+        BuildBox(mix => mix.sass(['app.scss', 'another.scss'], './includes/styles/done.css'));
 
         runGulp(() => {
-            shouldExist('./public/styles/done.css');
+            shouldExist('./includes/styles/done.css');
 
             done();
         });
@@ -64,7 +64,7 @@ var runGulp = assertions => {
     gulp.start('default', () => {
         assertions();
 
-        remove.sync('./public/css');
-        remove.sync('./public/styles');
+        remove.sync('./includes/css');
+        remove.sync('./includes/styles');
     });
 };
