@@ -2,51 +2,51 @@ import fs from 'fs';
 import _ from 'underscore';
 
 /**
- * Elixir is a wrapper around Gulp.
+ * BuildBox is a wrapper around Gulp.
  *
  * @param {Function} recipe
  */
-const Elixir = function(recipe) {
+const BuildBox = function(recipe) {
     // Perform any last-minute initializations.
     init();
 
-    // Load all of Elixir's task definitions.
+    // Load all of BuildBox's task definitions.
     require('require-dir')('./tasks');
 
     // Load the user's Gulpfile recipe.
-    recipe(Elixir.mixins);
+    recipe(BuildBox.mixins);
 
     // And run their chosen tasks.
-    Elixir.tasks.forEach(task => task.toGulp());
+    BuildBox.tasks.forEach(task => task.toGulp());
 };
 
-Elixir.mixins       = {};
-Elixir.Log          = require('./Logger').default;
-Elixir.GulpPaths    = require('./GulpPaths').default;
-Elixir.config       = require('./Config').default;
-Elixir.Plugins      = require('gulp-load-plugins')();
-Elixir.Task         = require('./Task').default(Elixir);
-Elixir.tasks        = new (require('./TaskCollection').default)();
+BuildBox.mixins       = {};
+BuildBox.Log          = require('./Logger').default;
+BuildBox.GulpPaths    = require('./GulpPaths').default;
+BuildBox.config       = require('./Config').default;
+BuildBox.Plugins      = require('gulp-load-plugins')();
+BuildBox.Task         = require('./Task').default(BuildBox);
+BuildBox.tasks        = new (require('./TaskCollection').default)();
 
 /**
  * Perform any last-minute initializations.
  */
 const init = function () {
-    if (! Elixir.config.notifications) {
+    if (! BuildBox.config.notifications) {
         process.env.DISABLE_NOTIFIER = true;
     }
 
-    Elixir.Notification = require('./Notification').default;
+    BuildBox.Notification = require('./Notification').default;
 };
 
 /**
- * Register a new task with Elixir.
+ * Register a new task with BuildBox.
  *
  * @param {string}   name
  * @param {Function} callback
  */
-Elixir.extend = function(name, callback) {
-    Elixir.mixins[name] = function() {
+BuildBox.extend = function(name, callback) {
+    BuildBox.mixins[name] = function() {
         callback.apply(this, arguments);
 
         return this.mixins;
@@ -54,11 +54,11 @@ Elixir.extend = function(name, callback) {
 };
 
 /**
- * Allow for config overrides, via an elixir.json file.
+ * Allow for config overrides, via an buildbox.json file.
  *
  * @param {string} file
  */
-Elixir.setDefaultsFrom = function(file) {
+BuildBox.setDefaultsFrom = function(file) {
     let overrides;
 
     if (fs.existsSync(file)) {
@@ -68,8 +68,8 @@ Elixir.setDefaultsFrom = function(file) {
             deepExtend: require('underscore-deep-extend')(_)
         });
 
-        _.deepExtend(Elixir.config, overrides);
+        _.deepExtend(BuildBox.config, overrides);
     }
-}('elixir.json');
+}('buildbox.json');
 
-module.exports = Elixir;
+module.exports = BuildBox;

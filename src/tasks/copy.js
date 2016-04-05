@@ -1,7 +1,7 @@
 import gulp from 'gulp';
-import Elixir from 'laravel-elixir';
+import BuildBox from 'BuildBox';
 
-const $ = Elixir.Plugins;
+const $ = BuildBox.Plugins;
 
 /*
  |----------------------------------------------------------------
@@ -14,10 +14,10 @@ const $ = Elixir.Plugins;
  |
  */
 
-Elixir.extend('copy', function(src, output) {
-    const paths = new Elixir.GulpPaths().src(src).output(output);
+BuildBox.extend('copy', function(src, output) {
+    const paths = new BuildBox.GulpPaths().src(src).output(output);
 
-    new Elixir.Task('copy', function() {
+    new BuildBox.Task('copy', function() {
         this.log(paths.src, paths.output);
 
         return (

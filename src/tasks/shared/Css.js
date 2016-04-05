@@ -1,8 +1,8 @@
 import gulp from 'gulp';
-import Elixir from '../../index';
+import BuildBox from '../../index';
 
-const $ = Elixir.Plugins;
-const config = Elixir.config;
+const $ = BuildBox.Plugins;
+const config = BuildBox.config;
 let map;
 let CleanCSS;
 
@@ -19,7 +19,7 @@ export default function(options) {
         .pipe($.if(config.sourcemaps, $.sourcemaps.init()))
         .pipe(options.compiler(options.pluginOptions))
         .on('error', function(e) {
-            new Elixir.Notification().error(e, name + ' Compilation Failed');
+            new BuildBox.Notification().error(e, name + ' Compilation Failed');
 
             this.emit('end');
         })
@@ -28,7 +28,7 @@ export default function(options) {
         .pipe($.if(config.production, minify()))
         .pipe($.if(config.sourcemaps, $.sourcemaps.write('.')))
         .pipe(gulp.dest(options.output.baseDir))
-        .pipe(new Elixir.Notification(name + ' Compiled!'))
+        .pipe(new BuildBox.Notification(name + ' Compiled!'))
     );
 };
 

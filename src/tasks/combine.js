@@ -1,7 +1,7 @@
 import gulp from 'gulp';
-import Elixir from 'laravel-elixir';
+import BuildBox from 'BuildBox';
 
-const $ = Elixir.Plugins;
+const $ = BuildBox.Plugins;
 
 /*
  |----------------------------------------------------------------
@@ -14,10 +14,10 @@ const $ = Elixir.Plugins;
  |
  */
 
-Elixir.extend('combine', function(src, output, baseDir) {
+BuildBox.extend('combine', function(src, output, baseDir) {
     const paths = prepGulpPaths(src, baseDir, output);
 
-    new Elixir.Task('combine', function() {
+    new BuildBox.Task('combine', function() {
         this.log(paths.src, paths.output);
 
         return (
@@ -40,7 +40,7 @@ Elixir.extend('combine', function(src, output, baseDir) {
  * @return {GulpPaths}
  */
 const prepGulpPaths = function(src, baseDir, output) {
-    return new Elixir.GulpPaths()
+    return new BuildBox.GulpPaths()
         .src(src, baseDir || '')
         .output(output);
 };

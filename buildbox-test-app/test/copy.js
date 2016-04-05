@@ -2,17 +2,17 @@ var fs     = require('fs');
 var gulp   = require('gulp');
 var remove = require('rimraf');
 var should = require('chai').should();
-var Elixir = require('laravel-elixir');
+var BuildBox = require('BuildBox');
 
 
 describe('Copy Task', function() {
 
     beforeEach(() => {
-        Elixir.tasks.empty();
+        BuildBox.tasks.empty();
     });
 
     it('copies a file to a new location', function(done) {
-        Elixir(mix => mix.copy('copy/foo/foo.txt', 'copy-dest'));
+        BuildBox(mix => mix.copy('copy/foo/foo.txt', 'copy-dest'));
 
         runGulp(() => {
             shouldExist('copy-dest/foo.txt');
@@ -22,7 +22,7 @@ describe('Copy Task', function() {
     });
 
     it('copies and renames a file to a new location', function(done) {
-        Elixir(mix => mix.copy('copy/foo/foo.txt', 'copy-dest/changed.txt'));
+        BuildBox(mix => mix.copy('copy/foo/foo.txt', 'copy-dest/changed.txt'));
 
         runGulp(() => {
             shouldExist('copy-dest/changed.txt');
@@ -32,7 +32,7 @@ describe('Copy Task', function() {
     });
 
     it('copies an array of folder paths to a new location', function(done) {
-        Elixir(mix => mix.copy(['copy/foo', 'copy/bar'], 'copy-dest'));
+        BuildBox(mix => mix.copy(['copy/foo', 'copy/bar'], 'copy-dest'));
 
         runGulp(() => {
             shouldExist('copy-dest/foo.txt');

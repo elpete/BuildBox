@@ -1,7 +1,7 @@
-import Elixir from 'laravel-elixir';
+import BuildBox from 'BuildBox';
 import runTests from './shared/Tests.js';
 
-const config = Elixir.config;
+const config = BuildBox.config;
 
 /*
  |----------------------------------------------------------------
@@ -14,7 +14,7 @@ const config = Elixir.config;
  |
  */
 
-Elixir.extend('phpSpec', function(src, command) {
+BuildBox.extend('phpSpec', function(src, command) {
     runTests(
         'PHPSpec',
         src || (config.testing.phpSpec.path + '/**/*Spec.php'),

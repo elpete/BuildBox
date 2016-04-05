@@ -1,7 +1,7 @@
-import Elixir from 'laravel-elixir';
+import BuildBox from 'BuildBox';
 import runTests from './shared/Tests';
 
-const config = Elixir.config;
+const config = BuildBox.config;
 
 /*
  |----------------------------------------------------------------
@@ -14,7 +14,7 @@ const config = Elixir.config;
  |
  */
 
-Elixir.extend('phpUnit', function(src, command) {
+BuildBox.extend('phpUnit', function(src, command) {
     runTests(
         'PHPUnit',
         src || (config.testing.phpUnit.path + '/**/*Test.php'),

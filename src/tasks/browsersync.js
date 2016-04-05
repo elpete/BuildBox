@@ -1,6 +1,6 @@
-import Elixir from 'laravel-elixir';
+import BuildBox from 'BuildBox';
 
-const config = Elixir.config;
+const config = BuildBox.config;
 let _;
 let gutils;
 let browserSync;
@@ -12,11 +12,11 @@ let browserSync;
  |
  | Browsersync makes your browser testing workflow faster by
  | synchronizing URLs, behavior, and code changes across
- | across multiple devices. And, now it's in Elixir!
+ | across multiple devices. And, now it's in BuildBox!
  |
  */
 
-Elixir.extend('browserSync', function (options) {
+BuildBox.extend('browserSync', function (options) {
     loadPlugins();
 
     options = _.extend({
@@ -45,7 +45,7 @@ Elixir.extend('browserSync', function (options) {
         browserSync.init(options);
     }
 
-    new Elixir.Task('browserSync', function () {}).watch();
+    new BuildBox.Task('browserSync', function () {}).watch();
 });
 
 /**

@@ -10,10 +10,10 @@ const production = gutils.env.production ||
  |----------------------------------------------------------------
  |
  | This file contains the proper paths and options for each and
- | and every Gulp task that Elixir wraps up. To override any
- | setting, reference elixir.config.* from your Gulpfile.
+ | and every Gulp task that BuildBox wraps up. To override any
+ | setting, reference buildbox.config.* from your Gulpfile.
  |
- | Alternatively you may create an elixir.json file within your
+ | Alternatively you may create an buildbox.json file within your
  | project root. As JSON, modify any settings contained here
  | and they'll take precedence over these defaults. Easy!
  |
@@ -26,7 +26,7 @@ const config = {
      | Production Mode
      |----------------------------------------------------------------
      |
-     | Elixir will trigger certain actions, dependent upon this flag.
+     | BuildBox will trigger certain actions, dependent upon this flag.
      | You may enable this mode by triggering "gulp --production",
      | enabling things like CSS and JS minification. EasyPeasy!
      |
@@ -91,7 +91,7 @@ const config = {
      | Notifications
      |----------------------------------------------------------------
      |
-     | As a convenience, Elixir will, when available, automatically
+     | As a convenience, BuildBox will, when available, automatically
      | display OS notifications upon the completion of any task.
      | But of course you're free to disable this, if needed.
      |
@@ -162,7 +162,7 @@ const config = {
          | CSS3 Autoprefixing
          |----------------------------------------------------------------
          |
-         | When working with any form of CSS, Elixir automatically runs
+         | When working with any form of CSS, BuildBox automatically runs
          | your file through a CSS autoprefixer, which automatically
          | adds or removes vendor-specific CSS3 prefixes. Useful!
          |
@@ -307,7 +307,7 @@ const config = {
          |----------------------------------------------------------------
          |
          | Browserify allows you to pull in Node modules in the browser!
-         | Generally a pain to get up and running, Elixir offers many
+         | Generally a pain to get up and running, BuildBox offers many
          | sensible defaults to get you up to speed super quickly.
          |
          */
@@ -404,7 +404,7 @@ const config = {
      |----------------------------------------------------------------
      |
      | Want to have your browser refresh instantly upon changing a bit
-     | of Sass or modifying a view? With Elixir, it has never been
+     | of Sass or modifying a view? With BuildBox, it has never been
      | easier. This contains default options for the extension.
      |
      */

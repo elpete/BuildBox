@@ -2,17 +2,17 @@ var fs     = require('fs');
 var gulp   = require('gulp');
 var remove = require('rimraf');
 var should = require('chai').should();
-var Elixir = require('laravel-elixir');
+var BuildBox = require('BuildBox');
 
 
 describe('Combine Task', function() {
 
     beforeEach(() => {
-        Elixir.tasks.empty();
+        BuildBox.tasks.empty();
     });
 
     it('combines a given array of files.', done => {
-        Elixir(mix => mix.combine([
+        BuildBox(mix => mix.combine([
             'resources/assets/js/lib1.js',
             './resources/assets/js/lib2.js'
         ], './public/js/combined.js'));
@@ -28,7 +28,7 @@ describe('Combine Task', function() {
     });
 
     it('allows for an optional base directory', done => {
-        Elixir(mix => mix.combine([
+        BuildBox(mix => mix.combine([
             'js/lib1.js',
             'js/lib2.js'
         ], './public/js/combined.js', 'resources/assets'));

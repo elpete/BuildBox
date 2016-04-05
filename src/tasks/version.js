@@ -1,6 +1,6 @@
-import Elixir from 'laravel-elixir';
+import BuildBox from 'BuildBox';
 
-let publicPath  = Elixir.config.publicPath;
+let publicPath  = BuildBox.config.publicPath;
 let fs;
 let del;
 let glob;
@@ -21,12 +21,12 @@ let revReplace;
  |
  */
 
-Elixir.extend('version', function(src, buildPath) {
+BuildBox.extend('version', function(src, buildPath) {
     const paths = prepGulpPaths(src, buildPath);
 
     loadPlugins();
 
-    new Elixir.Task('version', function() {
+    new BuildBox.Task('version', function() {
         const files = vinylPaths();
         const manifest = paths.output.baseDir + '/rev-manifest.json';
 
@@ -72,10 +72,10 @@ Elixir.extend('version', function(src, buildPath) {
  */
 const prepGulpPaths = function(src, buildPath) {
     src = Array.isArray(src) ? src : [src];
-    buildPath = buildPath || Elixir.config.get('public.versioning.buildFolder')
+    buildPath = buildPath || BuildBox.config.get('public.versioning.buildFolder')
 
-    const paths = new Elixir.GulpPaths()
-        .src(src, Elixir.config.publicPath)
+    const paths = new BuildBox.GulpPaths()
+        .src(src, BuildBox.config.publicPath)
         .output(buildPath);
 
     // We've no interested in tracking the

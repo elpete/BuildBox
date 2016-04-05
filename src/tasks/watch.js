@@ -1,7 +1,7 @@
 import gulp from 'gulp';
-import Elixir from 'laravel-elixir';
+import BuildBox from 'BuildBox';
 
-const batch = Elixir.Plugins.batch;
+const batch = BuildBox.Plugins.batch;
 
 /*
  |----------------------------------------------------------------
@@ -17,8 +17,8 @@ const batch = Elixir.Plugins.batch;
 gulp.task('watch', function() {
     initBrowserify();
 
-    Elixir.tasks.forEach(task => {
-        const batchOptions = Elixir.config.batchOptions;
+    BuildBox.tasks.forEach(task => {
+        const batchOptions = BuildBox.config.batchOptions;
 
         if (task.hasWatchers()) {
             gulp.watch(task.watchers, { interval: 1000 }, batch(batchOptions, (events) => {
@@ -32,8 +32,8 @@ gulp.task('watch', function() {
  * Determine if Browserify is included in the list.
  */
 const initBrowserify = function() {
-    if (Elixir.tasks.has('browserify')) {
-        Elixir.config.js.browserify.watchify.enabled = true;
+    if (BuildBox.tasks.has('browserify')) {
+        BuildBox.config.js.browserify.watchify.enabled = true;
 
         gulp.start('browserify');
     }

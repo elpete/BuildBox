@@ -1,5 +1,5 @@
 import gulp from 'gulp';
-import Elixir from 'laravel-elixir';
+import BuildBox from 'BuildBox';
 
 /*
  |----------------------------------------------------------------
@@ -13,9 +13,9 @@ import Elixir from 'laravel-elixir';
  */
 
 gulp.task('tdd', function() {
-    new Elixir.Log.message('Watching for tests...');
+    new BuildBox.Log.message('Watching for tests...');
 
-    Elixir.tasks
+    BuildBox.tasks
         .filter(task => task.category == 'tdd')
         .forEach(task => gulp.watch(task.watchers, [task.name]));
 });

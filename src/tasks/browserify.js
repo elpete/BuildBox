@@ -1,8 +1,8 @@
 import gulp from 'gulp';
-import Elixir from 'laravel-elixir';
+import BuildBox from 'BuildBox';
 
-const $ = Elixir.Plugins;
-const config = Elixir.config;
+const $ = BuildBox.Plugins;
+const config = BuildBox.config;
 let gutil;
 let buffer;
 let source;
@@ -21,12 +21,12 @@ let bundle;
  |
  */
 
-Elixir.extend('browserify', function(src, output, baseDir, options) {
+BuildBox.extend('browserify', function(src, output, baseDir, options) {
     const paths = prepGulpPaths(src, baseDir, output);
 
     loadPlugins();
 
-    new Elixir.Task('browserify', function() {
+    new BuildBox.Task('browserify', function() {
         const stream = config.js.browserify.watchify.enabled
             ? watchifyStream
             : browserifyStream;
@@ -38,7 +38,7 @@ Elixir.extend('browserify', function(src, output, baseDir, options) {
                 stream
                 .bundle()
                 .on('error', function(e) {
-                    new Elixir.Notification().error(
+                    new BuildBox.Notification().error(
                         e, 'Browserify Failed!'
                     );
 
@@ -50,7 +50,7 @@ Elixir.extend('browserify', function(src, output, baseDir, options) {
                 .pipe($.if(config.production, $.uglify(config.js.uglify.options)))
                 .pipe($.if(config.sourcemaps, $.sourcemaps.write('.')))
                 .pipe(gulp.dest(paths.output.baseDir))
-                .pipe(new Elixir.Notification('Browserify Compiled!'))
+                .pipe(new BuildBox.Notification('Browserify Compiled!'))
             );
         }.bind(this);
 
@@ -74,7 +74,7 @@ Elixir.extend('browserify', function(src, output, baseDir, options) {
  * @return {GulpPaths}
  */
 const prepGulpPaths = function(src, baseDir, output) {
-    return new Elixir.GulpPaths()
+    return new BuildBox.GulpPaths()
         .src(src, baseDir || config.get('assets.js.folder'))
         .output(output || config.get('public.js.outputFolder'), 'bundle.js');
 };

@@ -6,7 +6,7 @@ export default class Notification  {
      * Create a new Notification instance.
      */
     constructor() {
-        this.title = 'Laravel Elixir';
+        this.title = 'BuildBox';
 
         // If an argument is provided, then we'll
         // assume they want to show a message.

@@ -2,7 +2,7 @@ import gulp from 'gulp';
 import _ from 'underscore';
 import gutils from 'gulp-util';
 
-let Elixir;
+let BuildBox;
 
 class Task {
 
@@ -30,7 +30,7 @@ class Task {
      * @return {Task}
      */
     static find(name) {
-        return Elixir.tasks.byName(name)[0];
+        return BuildBox.tasks.byName(name)[0];
     }
 
     /**
@@ -51,7 +51,7 @@ class Task {
      * @return {Task}
      */
     register() {
-        Elixir.tasks.push(this);
+        BuildBox.tasks.push(this);
 
         return this;
     }
@@ -110,12 +110,12 @@ class Task {
     log(src, output) {
         var task = this.name.substr(0,1).toUpperCase() + this.name.substr(1);
 
-        Elixir.Log
+        BuildBox.Log
            .heading("Fetching " + task + " Source Files...")
            .files(src.path ? src.path : src, true);
 
         if (output) {
-            Elixir.Log
+            BuildBox.Log
                 .heading('Saving To...')
                 .files(output.path ? output.path : output);
         }
@@ -135,12 +135,12 @@ class Task {
 
         gulp.task(name, function () {
             if (shouldRunAllTasksWithName(name)) {
-                return Elixir.tasks.byName(name)
+                return BuildBox.tasks.byName(name)
                     .forEach(task => task.run());
             }
 
             // Otherwise, we can run the current task.
-            return Elixir.tasks.findIncompleteByName(name)[0].run();
+            return BuildBox.tasks.findIncompleteByName(name)[0].run();
         });
     }
 }
@@ -155,9 +155,9 @@ let shouldRunAllTasksWithName = function(name) {
     return _.intersection(gutils.env._, [name, 'watch', 'tdd']).length;
 };
 
-export default function(elixir) {
-    // Make Elixir available throughout this file.
-    Elixir = elixir;
+export default function(buildBox) {
+    // Make BuildBox available throughout this file.
+    BuildBox = buildBox;
 
     return Task;
 };

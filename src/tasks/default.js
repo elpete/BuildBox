@@ -1,5 +1,5 @@
 import gulp from 'gulp';
-import Elixir from 'laravel-elixir';
+import BuildBox from 'BuildBox';
 import inSequence from 'run-sequence';
 
 /*
@@ -14,5 +14,5 @@ import inSequence from 'run-sequence';
  */
 
 gulp.task('default', function() {
-    inSequence.apply(this, Elixir.tasks.names());
+    inSequence.apply(this, BuildBox.tasks.names());
 });

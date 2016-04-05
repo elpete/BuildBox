@@ -1,8 +1,8 @@
 import gulp from 'gulp';
-import Elixir from 'laravel-elixir';
+import BuildBox from 'BuildBox';
 
-const $ = Elixir.Plugins;
-const config = Elixir.config;
+const $ = BuildBox.Plugins;
+const config = BuildBox.config;
 
 /*
  |----------------------------------------------------------------
@@ -15,10 +15,10 @@ const config = Elixir.config;
  |
  */
 
-Elixir.extend('scripts', function(scripts, output, baseDir) {
+BuildBox.extend('scripts', function(scripts, output, baseDir) {
     const paths = prepGulpPaths(scripts, baseDir, output);
 
-    new Elixir.Task('scripts', function() {
+    new BuildBox.Task('scripts', function() {
         return gulpTask.call(this, paths);
     })
     .watch(paths.src.path)
@@ -26,10 +26,10 @@ Elixir.extend('scripts', function(scripts, output, baseDir) {
 });
 
 
-Elixir.extend('scriptsIn', function(baseDir, output) {
+BuildBox.extend('scriptsIn', function(baseDir, output) {
     const paths = prepGulpPaths('**/*.js', baseDir, output);
 
-    new Elixir.Task('scriptsIn', function() {
+    new BuildBox.Task('scriptsIn', function() {
         return gulpTask.call(this, paths);
     })
     .watch(paths.src.path)
@@ -37,10 +37,10 @@ Elixir.extend('scriptsIn', function(baseDir, output) {
 });
 
 
-Elixir.extend('babel', function(scripts, output, baseDir, options) {
+BuildBox.extend('babel', function(scripts, output, baseDir, options) {
     const paths = prepGulpPaths(scripts, baseDir, output);
 
-    new Elixir.Task('babel', function() {
+    new BuildBox.Task('babel', function() {
         const babelOptions = options || config.js.babel.options;
 
         return gulpTask.call(this, paths, babelOptions);
@@ -65,13 +65,13 @@ const gulpTask = function(paths, babel) {
         .pipe($.concat(paths.output.name))
         .pipe($.if(babel, $.babel(babel)))
         .on('error', function(e) {
-            new Elixir.Notification().error(e, 'Babel Compilation Failed!');
+            new BuildBox.Notification().error(e, 'Babel Compilation Failed!');
             this.emit('end');
         })
         .pipe($.if(config.production, $.uglify(config.js.uglify.options)))
         .pipe($.if(config.sourcemaps, $.sourcemaps.write('.')))
         .pipe(gulp.dest(paths.output.baseDir))
-        .pipe(new Elixir.Notification('Scripts Merged!'))
+        .pipe(new BuildBox.Notification('Scripts Merged!'))
     );
 };
 
@@ -84,7 +84,7 @@ const gulpTask = function(paths, babel) {
  * @return {GulpPaths}
  */
 const prepGulpPaths = function(src, baseDir, output) {
-    return new Elixir.GulpPaths()
+    return new BuildBox.GulpPaths()
         .src(src, baseDir || config.get('assets.js.folder'))
         .output(output || config.get('public.js.outputFolder'), 'all.js');
 };

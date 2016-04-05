@@ -1,5 +1,5 @@
 import gulp from 'gulp';
-import Elixir from 'laravel-elixir';
+import BuildBox from 'BuildBox';
 
 /*
  |----------------------------------------------------------------
@@ -7,21 +7,21 @@ import Elixir from 'laravel-elixir';
  |----------------------------------------------------------------
  |
  | Need to execute a shell script, as part of your compile
- | process? No problem. Elixir can help with that. Just
+ | process? No problem. BuildBox can help with that. Just
  | call `mix.exec('command')`, and, bam, you're set!
  |
  */
 
-Elixir.extend('exec', function(command, watcher) {
-    const task = new Elixir.Task('exec', function() {
-        Elixir.Log
+BuildBox.extend('exec', function(command, watcher) {
+    const task = new BuildBox.Task('exec', function() {
+        BuildBox.Log
             .heading('Triggering Command...')
             .message(command);
 
         return (
             gulp
             .src('')
-            .pipe(Elixir.Plugins.shell(command))
+            .pipe(BuildBox.Plugins.shell(command))
         );
     });
 

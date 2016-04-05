@@ -1,8 +1,8 @@
 import gulp from 'gulp';
-import Elixir from 'laravel-elixir';
+import BuildBox from 'BuildBox';
 
-const $ = Elixir.Plugins;
-const config = Elixir.config;
+const $ = BuildBox.Plugins;
+const config = BuildBox.config;
 let CleanCSS;
 let map;
 
@@ -17,12 +17,12 @@ let map;
  |
  */
 
-Elixir.extend('styles', function(styles, output, baseDir) {
+BuildBox.extend('styles', function(styles, output, baseDir) {
     const paths = prepGulpPaths(styles, baseDir, output);
 
     loadPlugins();
 
-    new Elixir.Task('styles', function() {
+    new BuildBox.Task('styles', function() {
         return gulpTask.call(this, paths);
     })
     .watch(paths.src.path)
@@ -30,10 +30,10 @@ Elixir.extend('styles', function(styles, output, baseDir) {
 });
 
 
-Elixir.extend('stylesIn', function(baseDir, output) {
+BuildBox.extend('stylesIn', function(baseDir, output) {
     const paths = prepGulpPaths('**/*.css', baseDir, output);
 
-    new Elixir.Task('stylesIn', function() {
+    new BuildBox.Task('stylesIn', function() {
         return gulpTask.call(this, paths);
     })
     .watch(paths.src.path)
@@ -56,7 +56,7 @@ const gulpTask = function(paths) {
         .pipe($.if(config.production, minify()))
         .pipe($.if(config.sourcemaps, $.sourcemaps.write('.')))
         .pipe(gulp.dest(paths.output.baseDir))
-        .pipe(new Elixir.Notification('Stylesheets Merged!'))
+        .pipe(new BuildBox.Notification('Stylesheets Merged!'))
     );
 };
 
@@ -88,7 +88,7 @@ const loadPlugins = function () {
  * @return {GulpPaths}
  */
 const prepGulpPaths = function(src, baseDir, output) {
-    return new Elixir.GulpPaths()
+    return new BuildBox.GulpPaths()
         .src(src, baseDir || config.get('assets.css.folder'))
         .output(output || config.get('public.css.outputFolder'), 'all.css');
 };

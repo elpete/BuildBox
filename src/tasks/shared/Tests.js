@@ -1,16 +1,16 @@
 import gulp from 'gulp';
-import Elixir from '../../index';
+import BuildBox from '../../index';
 
-const notify = new Elixir.Notification();
+const notify = new BuildBox.Notification();
 
 export default function(name, src, command) {
-    new Elixir.Task(name, function(error) {
-        Elixir.Log.heading('Triggering ' + name + ': ' + command);
+    new BuildBox.Task(name, function(error) {
+        BuildBox.Log.heading('Triggering ' + name + ': ' + command);
 
         return (
             gulp
             .src('')
-            .pipe(Elixir.Plugins.shell(command))
+            .pipe(BuildBox.Plugins.shell(command))
             .on('error', function(e) {
                 notify.forFailedTests(e, name);
 
@@ -20,6 +20,6 @@ export default function(name, src, command) {
         );
     })
     .watch(src)
-    .watch(Elixir.config.appPath + '/**/*.php', 'tdd')
-    .watch(Elixir.config.viewPath +'/**/*.php', 'tdd');
+    .watch(BuildBox.config.appPath + '/**/*.php', 'tdd')
+    .watch(BuildBox.config.viewPath +'/**/*.php', 'tdd');
 };

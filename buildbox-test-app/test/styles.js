@@ -2,17 +2,16 @@ var fs     = require('fs');
 var gulp   = require('gulp');
 var remove = require('rimraf');
 var should = require('chai').should();
-var Elixir = require('laravel-elixir');
-
+var BuildBox = require('BuildBox');
 
 describe('Styles Task', function() {
 
     beforeEach(() => {
-        Elixir.tasks.empty();
+        BuildBox.tasks.empty();
     });
 
     it('merges stylesheets together', function(done) {
-        Elixir(mix => mix.styles(['one.css', 'two.css']));
+        BuildBox(mix => mix.styles(['one.css', 'two.css']));
 
         runGulp(() => {
             shouldExist('public/css/all.css');
@@ -22,7 +21,7 @@ describe('Styles Task', function() {
     });
 
     it('merges to any file the user wishes', function(done) {
-        Elixir(mix => mix.styles(['one.css', 'two.css'], './public/css/merged.css'));
+        BuildBox(mix => mix.styles(['one.css', 'two.css'], './public/css/merged.css'));
 
         runGulp(() => {
             shouldExist('public/css/merged.css');
@@ -32,7 +31,7 @@ describe('Styles Task', function() {
     });
 
     it('applies a custom base directory', function(done) {
-        Elixir(mix => {
+        BuildBox(mix => {
             // We'll copy files over to a custom directory to test this.
             mix.copy('./resources/assets/css', './resources/assets/styles');
 

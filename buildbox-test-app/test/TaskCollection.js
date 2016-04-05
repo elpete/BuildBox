@@ -1,9 +1,9 @@
 var expect = require('chai').expect;
 
-import Elixir from 'laravel-elixir';
-import TasksCollection from 'laravel-elixir/src/TaskCollection';
+var BuildBox = require('BuildBox');
+import TasksCollection from 'BuildBox/src/TaskCollection';
 
-let Task = Elixir.Task;
+let Task = BuildBox.Task;
 
 describe('Task Collection', function() {
     let taskOne, taskTwo, taskThree, tasks;
